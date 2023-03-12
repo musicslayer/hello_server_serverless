@@ -1,0 +1,32 @@
+const accountDataMap = new Map();
+const gameDataMap = new Map();
+
+function initializeAccount() {
+    accountDataMap.set(username, createNewAccountData(username, password, email));
+	gameDataMap.set(username, createNewGameData(username));
+}
+
+function createNewAccountData(username, password, email) {
+	// For security, do not store passwords.
+	accountData = new Map();
+	accountData.set("username", username);
+	accountData.set("email", email);
+	accountData.set("token", createToken(username, password));
+	accountData.set("isResettingPassword", false);
+	accountData.set("isLoggedIn", false);
+	return accountData;
+}
+
+function createNewGameData(username) {
+	gameData = new Map();
+	gameData.set("username", username);
+	gameData.set("experience", 0);
+	gameData.set("is_powerful", false);
+	return gameData;
+}
+
+function createToken(username, password) {
+	return username + password;
+}
+
+module.exports.initializeAccount = initializeAccount;
